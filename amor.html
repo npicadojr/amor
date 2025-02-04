@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amor</title>
+    <style>
+        /* Importar la fuente Open Sans */
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+        body {
+            font-family: 'Open Sans', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #f9d7e6, #ffe6e6);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        h1, h2 {
+            color: #e74c3c;
+            animation: fadeIn 2s ease-in-out;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #c0392b;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: 2px solid #e74c3c;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 300px;
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            animation: float 5s infinite ease-in-out;
+        }
+        .heart::before, .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+        .heart::after {
+            left: 10px;
+            top: 0;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .container {
+            position: relative;
+            padding: 50px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #666;
+        }
+        .hidden {
+            display: none;
+        }
+        .reveal-button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .reveal-button:hover {
+            background-color: #c0392b;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Acertijo 1 -->
+        <h1>¡Hola, amor!</h1>
+        <p>Para llegar a tu objetivo tendrás que resolver algunos acertijos. ¿Estás lista?</p>
+        <button onclick="window.location.href='#acertijo1'">Comenzar</button>
+    </div>
+    <div id="acertijo1" class="container" style="display: none;">
+        <h2>Acertijo 1:</h2>
+        <p>Cuando es nuestro aniversario?</p>
+        <input type="text" id="respuesta1" placeholder="Escribe tu respuesta aquí">
+        <button onclick="verificarRespuesta(1)">Enviar</button>
+    </div>
+    <div id="acertijo2" class="container" style="display: none;">
+        <h2>Acertijo 2:</h2>
+        <p>Como se llama el peluche de oveja que te di?</p>
+        <input type="text" id="respuesta2" placeholder="Escribe tu respuesta aquí">
+        <button onclick="verificarRespuesta(2)">Enviar</button>
+    </div>
+    <div id="acertijo3" class="container" style="display: none;">
+        <h2>Acertijo 3:</h2>
+        <p>En que lugar te pedi que seas mi novia?</p>
+        <input type="text" id="respuesta3" placeholder="Escribe tu respuesta aquí">
+        <button onclick="verificarRespuesta(3)">Enviar</button>
+    </div>
+    <div id="acertijo4" class="container" style="display: none;">
+        <h2>Acertijo 4:</h2>
+        <p>Eres la mejor novia de todas?</p>
+        <input type="text" id="respuesta4" placeholder="Escribe tu respuesta aquí">
+        <button onclick="verificarRespuesta(4)">Enviar</button>
+    </div>
+    <div id="peticion" class="container" style="display: none;">
+        <h1>¡Felicidades amorrr!</h1>
+        <p>Resolviste todos los acertijos, así que tengo algo que decirte...</p>
+        <div id="peticion-text" class="hidden">
+            <p>Desde que entraste en mi vida amor, he mejorado mucho como persona. Eres la niña más bonita y siempre serás mi apoyo incondicional y mi mayor felicidad. Por eso, hoy quiero pedirte algo muy importante...</p>
+            <h2>¿Quisieras ser mi San Valentín?</h2>
+            <p>Te amo más allá de las palabras, y espero que este San Valentín sea solo el comienzo de muchos más juntos.</p>
+            <p>Con todo mi corazón,  
+            Nestor</p>
+        </div>
+        <button class="reveal-button" id="reveal-button">Haz clic aquí para ver mi petición ❤️</button>
+    </div>
+    <footer>
+        Hecho de mi ❤️ para ti.
+    </footer>
+    <script>
+        // Crear corazones flotantes distribuidos uniformemente
+        for (let i = 0; i < 50; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh'; // Distribuir verticalmente
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.opacity = Math.random();
+            document.body.appendChild(heart);
+        }
+
+        // Verificar respuestas de los acertijos
+        function verificarRespuesta(acertijo) {
+            const respuestas = [
+                ["20 de diciembre", "20 dic", "20d"], // Varias opciones para el acertijo 1
+                ["michaello", "michaelo", "micaelo"], // Varias opciones para el acertijo 2
+                ["goncha", "en goncha", "el goncha"], // Varias opciones para el acertijo 3
+                ["si", "claro", "obvio", "por supuesto","sip"] // Varias opciones para el acertijo 4
+            ];
+            const respuestaUsuario = document.getElementById(`respuesta${acertijo}`).value.trim().toLowerCase(); // Normalizar la respuesta
+            const respuestasValidas = respuestas[acertijo - 1]; // Obtener las respuestas válidas para este acertijo
+            if (respuestasValidas.includes(respuestaUsuario)) {
+                alert("Eres muy buena amor asi que avanzas al siguiente acertijo.");
+                document.getElementById(`acertijo${acertijo}`).style.display = "none";
+                if (acertijo === 4) {
+                    document.getElementById("peticion").style.display = "block";
+                } else {
+                    document.getElementById(`acertijo${acertijo + 1}`).style.display = "block";
+                }
+            } else {
+                alert("Intenta de nuevo amor");
+            }
+        }
+
+        // Mostrar el primer acertijo al hacer clic en "Comenzar"
+        document.querySelector("button").addEventListener("click", () => {
+            document.querySelector(".container").style.display = "none";
+            document.getElementById("acertijo1").style.display = "block";
+        });
+
+        // Evento para mostrar la petición al hacer clic en el botón
+        document.getElementById("reveal-button").addEventListener("click", () => {
+            document.getElementById("reveal-button").classList.add("hidden");
+            document.getElementById("peticion-text").classList.remove("hidden");
+        });
+    </script>
+</body>
+</html>
